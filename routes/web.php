@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(Auth::guest())
+    return Redirect::to('login');
+    return Redirect::to('/timeline');
 });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::get('/timeline', [App\Http\Controllers\TimelineController::class, 'index'])->name('timeline');
 
 //TODO --> Create Timeline
