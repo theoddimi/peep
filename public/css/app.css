@@ -1,5 +1,53 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
+.avatar-container {
+  padding: 4px;
+}
+
+.avatar-container img {
+  border: 1px solid grey;
+  border-radius: 50px;
+  padding: 2px;
+}
+
+.peep-card {
+  border-radius: 20px !important;
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.peep-card .peep-card-header {
+  background-color: transparent;
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+}
+
+.peep-card .peep-user-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.peep-card .peep-user-peepname,
+.peep-card .peep-date-info {
+  display: block;
+  color: #657786;
+}
+
+.peep-card .peep-card-body-text {
+  font-size: 18px;
+}
+
+.peep-card .peep-user-info {
+  padding: 5px;
+}
+
 /*!
  * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors

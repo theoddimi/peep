@@ -1,0 +1,38 @@
+@import 'peepv';
+
+.peep-card{
+  border-radius: 20px !important;
+  background-color: $peep-background;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+
+  .peep-card-header{
+    background-color: $peep-background;
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+
+  .peep-user-title{
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .peep-user-peepname, .peep-date-info{
+    display: block;
+    color:rgb(101, 119, 134);
+  }
+
+  .peep-card-body-text{
+    font-size: 18px;
+  }
+
+  .peep-user-info{
+    padding: 5px;
+  }
+}

@@ -64,7 +64,7 @@
                                   <a class="dropdown-item" href="#">
                                     My Profile
                                   </a>
-                                  <a class="dropdown-item" href="#">
+                                  <a class="dropdown-item" href="{{route('peep.create')}}">
                                     Post a PeeP
                                   </a>
                                   <a class="dropdown-item" href="#">
