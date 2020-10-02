@@ -4,11 +4,12 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-5">
           @if(\Request::route()->getName() === "peep.show")
-            {{dd($peep)}}
             @include('partials.peeps.show')
-            @endif
+          @elseif( \Request::route()->getName() === "peep.create")
+            @include('partials.peeps.create')
+          @endif
         </div>
     </div>
 </div>

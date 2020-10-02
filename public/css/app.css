@@ -1,10 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
-.avatar-container {
-  padding: 4px;
+textarea {
+  border: none;
+  overflow: auto;
+  outline: none !important;
+  box-shadow: none !important;
+  resize: none;
 }
 
-.avatar-container img {
+.avatar-container {
+  padding: 4px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.avatar-container img.avatar {
   border: 1px solid grey;
   border-radius: 50px;
   padding: 2px;
@@ -21,6 +31,15 @@
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+}
+
+.peep-card .peep-card-body-media {
+  text-align: center;
+  margin: auto;
+}
+
+.peep-card .peep-card-body-media img {
+  border-radius: 20px;
 }
 
 .peep-card .peep-card-header {
@@ -46,6 +65,91 @@
 
 .peep-card .peep-user-info {
   padding: 5px;
+}
+
+.peep-actions-line {
+  padding: 5px;
+}
+
+.peep-actions-inner {
+  display: inline-block;
+}
+
+.upload-media i {
+  font-size: 25px;
+  padding: 10px;
+  color: #1da1f2;
+}
+
+.peep-action-post {
+  position: relative;
+}
+
+.peep-action-post button {
+  background-color: #1da1f2;
+  color: white;
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 10px 20px;
+}
+
+.peep-action-post::before {
+  content: "";
+  position: absolute;
+  border-color: rgba(0, 0, 0, 0.1);
+  border-style: solid;
+  border-width: 0 1px 0 0;
+  height: 100%;
+  left: -10px;
+  top: 0;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  /* chromes and blink button */
+  cursor: pointer;
+}
+
+.image-upload input {
+  cursor: pointer;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.image-upload {
+  display: inline;
+  width: 100%;
+  height: 45px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  position: relative;
+  text-align: center;
+  background: transparent;
+  color: #666;
+  overflow: hidden;
+}
+
+#peep-image-preview {
+  max-width: 150px;
+  display: inline;
+  margin-top: 100%;
+  margin-bottom: 20px;
+  width: auto;
+  height: auto;
+  max-height: 400px;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#peep-image-preview-remove {
+  cursor: pointer;
+  color: #f73c33;
 }
 
 /*!

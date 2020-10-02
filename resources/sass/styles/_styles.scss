@@ -1,6 +1,10 @@
+textarea{border:none;overflow:auto;outline: none !important;-webkit-box-shadow: none !important;-moz-box-shadow: none;box-shadow: none !important;resize: none;}
+
 .avatar-container{
   padding: 4px;
-  img{
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+  img.avatar{
     border:1px solid grey;
     border-radius:50px;
     padding: 2px;
