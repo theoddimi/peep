@@ -20,7 +20,7 @@ class CreateFollowersTable extends Migration
             $table->foreign('follower_id')->references('id')->on('users');
             $table->index('user_id');
             $table->index('follower_id');
-            $table->unique('user_id', 'follower_id');
+            $table->unique(['user_id', 'follower_id']);
             $table->timestamps();
         });
     }

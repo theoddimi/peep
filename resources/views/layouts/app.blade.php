@@ -62,7 +62,7 @@
                                     {{ Auth::user()->name }}
                                   </a>
                                   <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="#">
+                                  <a class="dropdown-item" href="{{url('/profile/'.Auth::user()->username)}}">
                                     My Profile
                                   </a>
                                   <a class="dropdown-item" href="{{route('peep.create')}}">

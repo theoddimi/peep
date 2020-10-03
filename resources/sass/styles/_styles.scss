@@ -5,8 +5,25 @@ textarea{border:none;overflow:auto;outline: none !important;-webkit-box-shadow: 
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   text-align: center;
   img.avatar{
-    border:1px solid grey;
-    border-radius:50px;
+    width:100%;
+    border:1px solid #1da1f2;
+    border-radius:80px;
     padding: 2px;
+    max-width:150px;
   }
+}
+
+.spacer-140{
+  margin-top:140px;
+}
+.spacer-10{
+  margin-top:10px;
+}
+
+.divider::after{
+  content:'';
+  border-right:1px solid  #1da1f2;
+  height:100%;
+  width:1px;
+  margin: 0 5px;
 }

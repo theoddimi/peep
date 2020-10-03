@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\Image;
+use \App\Models\Peep;
+use \Intervention\Image\Facades\Image as ImageEditor;
 
 class PeepController extends Controller
 {
@@ -48,61 +50,98 @@ class PeepController extends Controller
     #Save image if exists
     if($request->hasFile('peep_image')){
       $imageFileName = $request->file('peep_image')->getClientOriginalName();
-      $imageResize = \Intervention\Image\Facades\Image::make($request->file('peep_image')->getRealPath());
-      $imageResize->resize(250,500, function ($constraint) {
+      $imageResize = ImageEditor::make($request->file('peep_image')->getRealPath());
+      $imageResize->resize(500,250, function ($constraint) {
         $constraint->aspectRatio();
         $constraint->upsize();
       });
+      \Storage::disk('public')->put('\/images\/'.$imageFileName, $peep->image->data);
       $peep->image()->save(new Image(['data' => $imageResize,
-                                      'image_name'=>$imageFileName])
-                                    );
-    }
-    return redirect()->back()->with('success','Ok');
+      'image_name'=>time().'_'.$imageFileName])
+    );
+  }
+  return redirect()->route('peep.show',$peep->id)->with('success','Ok');
+}
+
+/**
+* Display the specified resource.
+*
+* @param  int  $id
+* @return \Illuminate\Http\Response
+*/
+public function show($id)
+{
+  $peep = \App\Models\Peep::findOrFail($id);
+  if($peep->image()->exists() ){
+    $imageName = $peep->image->image_name;
+    if(!\Storage::disk('public')->exists('\/images\/'.$imageName))
+    \Storage::disk('public')->put('\/images\/'.$imageName, $peep->image->data);
   }
 
-  /**
-  * Display the specified resource.
-  *
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
-  public function show($id)
-  {
-    $peep = \App\Models\Peep::findOrFail($id);
-    return view('peep')->with(compact('peep'));
+  return view('peep')->with(compact('peep'));
+}
+
+/**
+* Show the form for editing the specified resource.
+*
+* @param  int  $id
+* @return \Illuminate\Http\Response
+*/
+public function edit($id)
+{
+
+  $peep = Peep::findOrFail($id);
+  return view('peep')->with(compact('peep'));
+}
+
+/**
+* Update the specified resource in storage.
+*
+* @param  \Illuminate\Http\Request  $request
+* @param  int  $id
+* @return \Illuminate\Http\Response
+*/
+public function update(Request $request, $id)
+{
+  $request->validate([
+    'peep-text'=>'required | max:140',
+    'peep_image'=> 'max:2048'
+  ]);
+
+  $peep = Peep::findOrFail($id);
+
+  $peep->text = $request->input('peep-text');
+  $peep->save();
+
+  if($request->hasFile('peep_image')){
+    $imageFileName = $request->file('peep_image')->getClientOriginalName();
+    $imageResize = ImageEditor::make($request->file('peep_image')->getRealPath());
+    $imageResize->resize(500,250, function ($constraint) {
+      $constraint->aspectRatio();
+      $constraint->upsize();
+    });
+    $image = ( $peep->image()->exists() ?   $peep->image :  new Image );
+
+    if(\Storage::disk('public')->exists('\/images\/'.$image->image_name))
+    \Storage::disk('public')->delete('\/images\/'.$image->image_name);
+
+    $image->data = $imageResize;
+    $image->image_name = time().'_'.$imageFileName;
+    $peep->image()->save($image);
+
   }
 
-  /**
-  * Show the form for editing the specified resource.
-  *
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
-  public function edit($id)
-  {
-    //
-  }
+  return redirect()->route('peep.show',$peep->id)->with('success','Ok');
+}
 
-  /**
-  * Update the specified resource in storage.
-  *
-  * @param  \Illuminate\Http\Request  $request
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
-  public function update(Request $request, $id)
-  {
-    //
-  }
-
-  /**
-  * Remove the specified resource from storage.
-  *
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
-  public function destroy($id)
-  {
-    //
-  }
+/**
+* Remove the specified resource from storage.
+*
+* @param  int  $id
+* @return \Illuminate\Http\Response
+*/
+public function destroy($id)
+{
+  //
+}
 }

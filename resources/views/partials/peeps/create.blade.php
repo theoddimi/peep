@@ -3,8 +3,10 @@
     <div class="card-body peep-card-body row">
       <div class="avatar-container col-md-2">
         <img class="avatar" src="https://api.adorable.io/avatars/50/abott@adorable.png"/>
-        <div class="peep-image-preview-container"><img src="" alt="" id="peep-image-preview">
-          <span style="display:none" id="peep-image-preview-remove">Remove</span>
+        <div class="spacer-140"></div>
+        <div class="peep-image-preview-container">
+        <img src="" alt="" id="peep-image-preview"/>
+        <span style="display:none" id="peep-image-preview-remove"><i class="fa fa-remove"></i></span>
         </div>
       </div>
 
@@ -13,7 +15,7 @@
           @csrf
           <div class="form-group">
             <label for="peep-text"></label>
-            <textarea name="peep-text" type="text" class="form-control" id="peep-text" aria-describedby="peep-help" placeholder="What are you thinking..."
+            <textarea name="peep-text" type="text" class="form-control" id="peep-text" aria-describedby="peep-help" placeholder="What's happening..."
             cols="40" rows="5" maxlength="140" style="resize:none; border:none; outline:none"></textarea>
             <small id="peep-help" class="form-text text-muted">
               <hr/>

@@ -18,6 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
     ];
@@ -44,5 +45,24 @@ class User extends Authenticatable
     public function peeps()
     {
         return $this->hasMany('\App\Models\Peep');
+    }
+
+    public function followers(){
+      $followers =  \Illuminate\Support\Facades\DB::table('followers')->where('user_id',$this->id)->pluck('follower_id');
+      return $this->find($followers);
+    }
+    public function following(){
+      $following = \Illuminate\Support\Facades\DB::table('followers')->where('follower_id',$this->id)->pluck('user_id');
+      return $this->find($following);
+    }
+    public function followersCount(){
+      return \Illuminate\Support\Facades\DB::table('followers')->where('user_id',$this->id)->count();
+    }
+    public function followingCount(){
+      return \Illuminate\Support\Facades\DB::table('followers')->where('follower_id',$this->id)->count();
+    }
+
+    public function alreadyFollow(){
+      return \Illuminate\Support\Facades\DB::table('followers')->where('follower_id',\Auth::id())->where('user_id',$this->id)->exists();
     }
 }

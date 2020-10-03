@@ -15,10 +15,12 @@
   .peep-card-body-media{
     text-align: center;
     margin: auto;
-  
+    background-color: #fff;
+
   }
   .peep-card-body-media img{
     border-radius: 20px;
+
   }
   .peep-card-header{
     background-color: $peep-background;
@@ -43,6 +45,46 @@
   .peep-user-info{
     padding: 5px;
   }
+
+.peep-card-body-image{
+  opacity:0;
+  max-width:250px;
+}
+.peep-card-body-image-bg{
+  margin: 4px;
+  padding: 4px;
+  // border: 1px solid #1da1f2;
+  padding:2px;
+  border-radius:20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  max-height: 250px;
+  height: 100%;
+}
+.peep-count-container{
+  width: 100%;
+  text-align: center;
+  margin-top:3px;
+}
+.peep-count{
+  padding: 2px 0;
+  // border-top: 1px solid #1da1f2;
+  border-bottom: 1px solid #1da1f2;
+  color:#1da1f2;
+  letter-spacing:1px;
+  font-weight: 600
+}
+
+#followers-count, #following-count{
+  font-weight: bold;
+  font-size:15px;
+}
+
+.profile-followers-container{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
 }
 
 
@@ -91,8 +133,6 @@ input[type=file]::-webkit-file-upload-button { /* chromes and blink button */
 #peep-image-preview {
   max-width: 150px;
   display: inline;
-  margin-top: 100%;
-  margin-bottom: 20px;
   width: auto;
   height: auto;
   max-height: 400px;
