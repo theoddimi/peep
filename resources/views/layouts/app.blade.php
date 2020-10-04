@@ -52,7 +52,7 @@
                         @else
 
                             <li class="nav-item ">
-                              <a class="nav-link" href="#">
+                              <a class="nav-link" href="{{route('timeline')}}">
                                  Timeline
                               </a>
                               </li>
@@ -68,7 +68,7 @@
                                   <a class="dropdown-item" href="{{route('peep.create')}}">
                                     Post a PeeP
                                   </a>
-                                  <a class="dropdown-item" href="#">
+                                  <a class="dropdown-item" href="{{route('user.list')}}">
                                     Users list
                                   </a>
                                   <div class="dropdown-divider"></div>

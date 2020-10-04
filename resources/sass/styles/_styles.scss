@@ -22,8 +22,11 @@ textarea{border:none;overflow:auto;outline: none !important;-webkit-box-shadow: 
 
 .divider::after{
   content:'';
-  border-right:1px solid  #1da1f2;
   height:100%;
   width:1px;
   margin: 0 5px;
+}
+
+.btn{
+  min-width:120px;
 }

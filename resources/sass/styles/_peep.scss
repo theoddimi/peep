@@ -33,8 +33,16 @@
     font-weight: 600;
   }
 
-  .peep-user-peepname, .peep-date-info{
+  .peep-user-username, .peep-date-info{
     display: block;
+    color:rgb(101, 119, 134);
+  }
+
+  .peep-user-username::before{
+    content:'@';
+    width: 10px;
+    height: 10px;
+    position: relative;
     color:rgb(101, 119, 134);
   }
 
@@ -92,6 +100,7 @@
 .peep-actions-inner{display:inline-block;}
 .upload-media i{font-size: 25px;  padding:10px; color:rgb(29 161 242);}
 .peep-action-post{  position:relative}
+.peep-action-post form{  padding:5px 0}
 .peep-action-post button{background-color:rgb(29 161 242); color:white; font-weight: 600; border-radius:30px; padding: 10px 20px;}
 .peep-action-post::before{
   content:'';

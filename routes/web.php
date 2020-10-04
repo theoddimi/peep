@@ -27,11 +27,16 @@ Route::group([ 'middleware' => 'auth:web'], function(){
   Route::resource('peep' , App\Http\Controllers\PeepController::class);
   Route::post('user/follow',[\App\Http\Controllers\UserController::class,'follow'])->name('user.follow');
   Route::post('user/unfollow',[\App\Http\Controllers\UserController::class,'unfollow'])->name('user.unfollow');
+  Route::get('users/list', [\App\Http\Controllers\UserController::class,'list'])->name('user.list');
+
+
   Route::get('/profile/{username}',function($username){
     $user = \App\Models\User::where('username',$username)->with(['peeps'=>function($query){
       $query->orderBy('created_at','desc');
     }])->firstOrFail();
     return view('profile')->with(compact('user'));
   });
+
+
 
 });

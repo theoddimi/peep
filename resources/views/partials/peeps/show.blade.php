@@ -9,8 +9,8 @@
       </div>
       <div class="peep-user-head col-md-10">
         <div class="peep-user-info">
-          <span class= "peep-user-title">{{$peep->user->name}}</span>
-          <span class= "peep-user-peepname">{{$peep->user->email}}</span>
+          <span class= "peep-user-name">{{$peep->user->name}}</span>
+          <span class= "peep-user-username"><a href="{{url('/profile/'.$peep->user->username)}}">{{$peep->user->username}}</a></span>
         </div>
       </div>
 

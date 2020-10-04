@@ -17,8 +17,8 @@
       <div class="peep-user-head col-md-8">
         <div class="row">
         <div class="peep-user-info col-md-9">
-          <span class= "peep-user-title">{{$user->username}}</span><br>
-          <span class= "peep-user-peepname">{{$user->email}}</span>
+          <span class= "peep-user-username">{{$user->username}}</span><br>
+          <span class= "peep-user-email">{{$user->email}}</span>
         </div>
           @if(\Auth::id() !== $user->id)
           <div class="peep-action-post  col-md-3">
