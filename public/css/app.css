@@ -41,9 +41,52 @@ textarea {
   min-width: 120px;
 }
 
+.paginator {
+  text-align: right;
+  padding: 10px;
+}
+
+.container {
+  margin-bottom: 20px;
+}
+
+.avatar-image-preview-container,
+#avatar-image-preview {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 250px;
+  height: 250px;
+  margin: auto;
+  border-radius: 150px;
+}
+
+#avatar-image-preview-remove {
+  cursor: pointer;
+}
+
+.avatar-submit {
+  background-color: #1da1f2;
+  color: white;
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 10px 20px;
+}
+
+.avatar-submit button {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  color: #fff;
+}
+
+.avatar-actions-line {
+  display: inline-block;
+}
+
 .peep-card {
   border-radius: 20px !important;
-  background-color: transparent;
+  background-color: #ffffff;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -65,7 +108,7 @@ textarea {
 }
 
 .peep-card .peep-card-header {
-  background-color: transparent;
+  background-color: #ffffff;
   padding-left: 2px !important;
   padding-right: 2px !important;
 }
@@ -223,6 +266,10 @@ input[type=file]::-webkit-file-upload-button {
 #peep-image-preview-remove {
   cursor: pointer;
   color: #f73c33;
+}
+
+.card-header:last-child {
+  border: none !important;
 }
 
 /*!

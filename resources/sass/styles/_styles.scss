@@ -30,3 +30,37 @@ textarea{border:none;overflow:auto;outline: none !important;-webkit-box-shadow: 
 .btn{
   min-width:120px;
 }
+
+.paginator{
+  text-align: right;
+  padding: 10px;
+}
+.container{
+  margin-bottom:20px
+}
+
+.avatar-image-preview-container, #avatar-image-preview{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width:250px;
+  height:250px;
+  margin:auto;
+  border-radius:150px;
+}
+
+#avatar-image-preview-remove{
+  cursor: pointer;
+}
+
+.avatar-submit{background-color:rgb(29 161 242); color:white; font-weight: 600; border-radius:30px; padding: 10px 20px;}
+.avatar-submit button{
+  background: transparent;
+    box-shadow: none;
+    border: none;
+    color: #fff;
+}
+
+.avatar-actions-line{
+  display:inline-block
+}

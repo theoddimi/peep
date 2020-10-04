@@ -4,7 +4,7 @@
       <div class="col-md-2">
       <a href='#' target="_blank" class="peep-avatar ">
       <div class="avatar-container ">
-        <img class="avatar"src="https://api.adorable.io/avatars/50/abott@adorable.png"/>
+        <img class="avatar"src="{{$user->avatar()}}"/>
       </div>
       </a>
       <div class="peep-count-container"><span class="peep-count"><h4 style="display:inline"> <b>{{$user->peeps->count()}}</b></h4> Peeps</span></div>

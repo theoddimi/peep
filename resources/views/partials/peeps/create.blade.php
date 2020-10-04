@@ -2,7 +2,7 @@
 
     <div class="card-body peep-card-body row">
       <div class="avatar-container col-md-2">
-        <img class="avatar" src="https://api.adorable.io/avatars/50/abott@adorable.png"/>
+        <img class="avatar" src="{{\Auth::user()->avatar()}}"/>
         <div class="spacer-140"></div>
         <div class="peep-image-preview-container">
         <img src="" alt="" id="peep-image-preview"/>
@@ -42,23 +42,6 @@
         @error('peep_image')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-
-
-
-
-
-
-    <!--    <p class="peep-card-body-text">
-          <span class="">Test PeeP Text!!</span>
-          <span class="peep-mention"></span>
-          <span class="peep-tag"></span>
-        </p>
-        <div class="peep-card-body-media">
-        </div>
-      <div class="peep-date-info">
-        1:09 AM · May 6, 2014
-
-      </div>-->
 
       </div>
 

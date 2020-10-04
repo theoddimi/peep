@@ -35,7 +35,7 @@ class TimelineController extends Controller
             ->from('followers')
             ->whereRaw('followers.user_id = peeps.user_id')
             ->whereRaw('followers.follower_id = '.\Auth::id());
-    })->orderByDesc('created_at')->get();
+    })->orderByDesc('created_at')->simplePaginate(5);
 
     return view('timeline')->with(compact('peeps'));
   }

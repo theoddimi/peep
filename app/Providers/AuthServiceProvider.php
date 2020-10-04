@@ -25,6 +25,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('edit-peep', function ($user, $peep) {
+          return $user->id === $peep->user_id;
+        });
+        Gate::define('edit-avatar', function ($user) {
+          return $user->id === \Auth::id();
+        });
     }
 }

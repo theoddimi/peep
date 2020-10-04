@@ -3,7 +3,7 @@
       <div class="col-md-2">
       <a href='#' target="_blank" class="peep-avatar ">
       <div class="avatar-container ">
-        <img class="avatar"src="https://api.adorable.io/avatars/50/abott@adorable.png"/>
+        <img class="avatar"src="{{$peep->user->avatar()}}"/>
       </div>
       </a>
       </div>
@@ -17,7 +17,9 @@
     </div>
 
     <div class="card-body peep-card-body">
+      @if(\Gate::allows('edit-peep',$peep))
       <a href="{{route('peep.edit',$peep->id)}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+      @endif
       <div class="peep-body">
         <p class="peep-card-body-text">
           <span class="">{{$peep->text}}</span>

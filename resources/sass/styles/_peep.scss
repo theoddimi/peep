@@ -151,3 +151,7 @@ input[type=file]::-webkit-file-upload-button { /* chromes and blink button */
 }
 
 #peep-image-preview-remove{cursor: pointer;color:#f73c33}
+
+.card-header:last-child{
+  border:none !important;
+}

@@ -65,4 +65,8 @@ class User extends Authenticatable
     public function alreadyFollow(){
       return \Illuminate\Support\Facades\DB::table('followers')->where('follower_id',\Auth::id())->where('user_id',$this->id)->exists();
     }
+
+    public function avatar(){
+      return !is_null($this->avatar) && \Storage::disk('public')->has('avatars/'.$this->avatar) ? \Storage::disk('public')->url('avatars/'.$this->avatar) : \Storage::disk('public')->url('avatars/avatar-default.png');
+    }
 }

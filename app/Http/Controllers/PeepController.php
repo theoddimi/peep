@@ -39,7 +39,7 @@ class PeepController extends Controller
   {
     $request->validate([
       'peep-text'=>'required | max:140',
-      'peep_image'=> 'max:2048'
+      'peep_image'=> 'max:2048 | mimes:jpeg,bmp,png'
     ]);
 
 
@@ -49,18 +49,18 @@ class PeepController extends Controller
 
     #Save image if exists
     if($request->hasFile('peep_image')){
-      $imageFileName = $request->file('peep_image')->getClientOriginalName();
+      $imageFileName = time().'_'.$request->file('peep_image')->getClientOriginalName();
       $imageResize = ImageEditor::make($request->file('peep_image')->getRealPath());
       $imageResize->resize(500,250, function ($constraint) {
         $constraint->aspectRatio();
         $constraint->upsize();
       });
-      \Storage::disk('public')->put('\/images\/'.$imageFileName, $peep->image->data);
+      \Storage::disk('public')->put('\/images\/'.$imageFileName, $imageResize->encode());
       $peep->image()->save(new Image(['data' => $imageResize,
-      'image_name'=>time().'_'.$imageFileName])
+      'image_name'=>$imageFileName])
     );
   }
-  return redirect()->route('peep.show',$peep->id)->with('success','Ok');
+  return redirect()->route('timeline')->with('success','Ok');
 }
 
 /**
@@ -89,8 +89,9 @@ public function show($id)
 */
 public function edit($id)
 {
-
   $peep = Peep::findOrFail($id);
+  \Gate::authorize('edit-peep', $peep);
+
   return view('peep')->with(compact('peep'));
 }
 
@@ -105,16 +106,17 @@ public function update(Request $request, $id)
 {
   $request->validate([
     'peep-text'=>'required | max:140',
-    'peep_image'=> 'max:2048'
+    'peep_image'=> 'max:2048 | mimes:jpeg,bmp,png'
   ]);
 
   $peep = Peep::findOrFail($id);
+  \Gate::authorize('edit-peep', $peep);
 
   $peep->text = $request->input('peep-text');
   $peep->save();
 
   if($request->hasFile('peep_image')){
-    $imageFileName = $request->file('peep_image')->getClientOriginalName();
+    $imageFileName = time().'_'.$request->file('peep_image')->getClientOriginalName();
     $imageResize = ImageEditor::make($request->file('peep_image')->getRealPath());
     $imageResize->resize(500,250, function ($constraint) {
       $constraint->aspectRatio();
@@ -124,14 +126,14 @@ public function update(Request $request, $id)
 
     if(\Storage::disk('public')->exists('\/images\/'.$image->image_name))
     \Storage::disk('public')->delete('\/images\/'.$image->image_name);
-
+    \Storage::disk('public')->put('\/images\/'.$imageFileName, $imageResize->encode());
     $image->data = $imageResize;
-    $image->image_name = time().'_'.$imageFileName;
+    $image->image_name = $imageFileName;
     $peep->image()->save($image);
 
   }
 
-  return redirect()->route('peep.show',$peep->id)->with('success','Ok');
+  return redirect()->route('user.profile',$peep->user->username);
 }
 
 /**
