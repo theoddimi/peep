@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TimelineController extends Controller
 {
@@ -30,6 +31,7 @@ class TimelineController extends Controller
     //         ->whereRaw('followers.user_id = peeps.user_id')
     //         ->whereRaw('followers.follower_id = '.\Auth::id());
     // })->orderBy('created_at','desc')->get();
+    Log::channel('mysql')->info('', ['type'=>'visits','page' => url()->current(), 'user' => \Auth::id()]);
     $peeps = \App\Models\Peep::whereIn('user_id',function($query){
       $query->select('user_id')
             ->from('followers')

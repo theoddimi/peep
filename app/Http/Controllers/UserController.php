@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\DB;
 use \Intervention\Image\Facades\Image as ImageEditor;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotifyForFollower;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
     public function follow(Request $request){
+      $user = \App\Models\User::findOrFail($request->input('followId'));
       DB::table('followers')->insert(['user_id' => $request->input('followId'), 'follower_id' => \Auth::id()]);
+      Mail::to($user->email)->send(new NotifyForFollower(auth()->user()));
       return redirect()->back();
     }
 
@@ -24,6 +29,8 @@ class UserController extends Controller
     }
 
     public function getProfile($username){
+
+      Log::channel('mysql')->info('', ['type'=>'visits','page' => url()->current(), 'user' => \Auth::id()]);
       $user = \App\Models\User::where('username',$username)->firstOrFail();
       $peeps = $user->peeps()->orderByDesc('created_at')->simplePaginate(5);
       return view('profile')->with(['user'=>$user, 'peeps' => $peeps]);

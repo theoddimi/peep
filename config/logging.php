@@ -37,8 +37,15 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single','mysql'],
             'ignore_exceptions' => false,
+        ],
+
+        'mysql' => [
+          'driver' => 'custom',
+          // 'handler' => App\Log\MySQLLoggingHandler::class,
+          'via' => App\Log\MySQLLogger::class,
+          'level' => 'info',
         ],
 
         'single' => [
@@ -99,6 +106,8 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+
     ],
 
 ];

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \App\Models\Image;
 use \App\Models\Peep;
 use \Intervention\Image\Facades\Image as ImageEditor;
+use Illuminate\Support\Facades\Log;
 
 class PeepController extends Controller
 {
@@ -26,6 +27,7 @@ class PeepController extends Controller
   */
   public function create()
   {
+    Log::channel('mysql')->info('', ['type'=>'visits','page' => url()->current(), 'user' => \Auth::id()]);
     return view('peep');
   }
 
@@ -71,6 +73,7 @@ class PeepController extends Controller
 */
 public function show($id)
 {
+  Log::channel('mysql')->info('', ['type'=>'visits','page' => url()->current(), 'user' => \Auth::id()]);
   $peep = \App\Models\Peep::findOrFail($id);
   if($peep->image()->exists() ){
     $imageName = $peep->image->image_name;
@@ -89,6 +92,7 @@ public function show($id)
 */
 public function edit($id)
 {
+  Log::channel('mysql')->info('', ['type'=>'visits','page' => url()->current(), 'user' => \Auth::id()]);
   $peep = Peep::findOrFail($id);
   \Gate::authorize('edit-peep', $peep);
 
