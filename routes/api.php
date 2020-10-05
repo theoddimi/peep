@@ -32,6 +32,18 @@ Route::group([ 'middleware' => 'auth:api'], function(){
         return $users;
 
   });
+  Route::get('/statistics', function (Request $request) {
+      $routes =   DB::select(' SELECT t.page, CONCAT(u.username, " (",t.visits_per_user,")") AS username_with_most_visits, (SELECT COUNT(s.user_id)  FROM page_visit_logs s WHERE t.page = s.page GROUP BY s.page) AS total_visits FROM
+                 (SELECT l.user_id,COUNT(l.user_id) visits_per_user, l.page FROM page_visit_logs l GROUP BY l.user_id, l.page ) t
+                LEFT JOIN users u
+                ON u.id = t.user_id
+                 WHERE t.visits_per_user =
+                (SELECT  f.max_total FROM
+                 (SELECT h.page, MAX(h.tot) max_total FROM (SELECT COUNT(z.user_id) tot,z.user_id, z.page FROM page_visit_logs z GROUP BY z.user_id, z.page) h  GROUP BY h.page) f
+                WHERE f.page = t.page) ');
+        return $routes;
+
+  });
 });
   // Route::middleware('auth:api')->get('/user', function (Request $request) {
   //     return $request->user();
