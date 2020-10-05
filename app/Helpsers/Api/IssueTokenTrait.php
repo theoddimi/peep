@@ -12,7 +12,7 @@ trait IssueTokenTrait{
 
 
   private function fetchClient(){
-    $client = Client::find(2);
+    $client = Client::find(env("PASSPORT_CLIENT_ID"));
     $this->clientId = $client->id;
     $this->clientSecret = $client->secret;
   }
@@ -25,7 +25,7 @@ trait IssueTokenTrait{
       'client_secret' => $this->clientSecret,
       'username'      => $request->username ,
       'scope'         => $scope,
-  
+
     ];
 
      $request->request->add($params);
